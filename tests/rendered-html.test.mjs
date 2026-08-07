@@ -5,7 +5,9 @@ import test from "node:test";
 test("build contains WYIRAN LAB metadata and Vue entry", async () => {
   const html = await readFile(new URL("../dist/client/index.html", import.meta.url), "utf8");
   assert.match(html, /<title>WYIRAN LAB/);
-  assert.match(html, /Digital experiments at the edge of design and technology/);
+  assert.match(html, /lang="zh-CN"/);
+  assert.match(html, /让复杂隐于无形，让体验自然发生/);
+  assert.match(html, /theme-color" content="#f5f7fa"/);
   assert.match(html, /id="app"/);
   assert.doesNotMatch(html, /情侣|王者荣耀|原神/);
 });
