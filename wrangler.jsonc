@@ -4,6 +4,9 @@
   "main": "./dist/server/index.js",
   "compatibility_date": "2026-08-20",
   "preview_urls": true,
+  "build": {
+    "command": "npm run build"
+  },
   "assets": {
     "directory": "./dist/client",
     "binding": "ASSETS"
