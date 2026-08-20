@@ -2,10 +2,9 @@
  * Naiwa — layered 3D Gaussian Splatting.
  *
  *   Scenes 0–1  clouds    — split volumetric cloud sea (background)
- *   Scene 2     frog      — masked frog + bench (foreground)
- *   Scene 3     veil      — near-cloud patch around the bench support
+ *   Scene 2     subject   — masked frog + bench + soft close cloud
  *
- * The cloud scene stays dense; the subject scene is background-masked so the
+ * The cloud sea stays dense; the unified subject is background-masked so the
  * two reconstructions can composite correctly without sorting blue splats.
  */
 
@@ -62,7 +61,7 @@ async function bootstrap() {
   const meta = await fetchSceneMeta();
   if (!meta) {
     hide($loading);
-    showNotice('3D 场景准备中 — 请先运行后端生成 clouds.ply 和 frog.ply', false);
+    showNotice('3D 场景准备中 — 请先生成云海与统一主体高斯资源', false);
     return;
   }
 

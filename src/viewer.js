@@ -3,12 +3,12 @@
  *
  * Layered compositing:
  *   Scenes 0–1 — split cloud reconstruction (full-bleed background)
- *   Scene 2    — masked frog + bench (foreground subject)
- *   Scene 3    — feathered near-cloud veil that anchors the bench in the sky
+ *   Scene 2    — masked frog + bench + soft foreground cloud (one subject)
  *
  * The cloud scene keeps its dense SHARP reconstruction. The subject PLY is
- * masked offline so the flat blue source backdrop never enters the sort. A
- * compact cloud patch sits in front of the support and hides its lower edge.
+ * masked offline so the flat blue source backdrop never enters the sort. The
+ * close cloud is reconstructed with the frog and bench so their occlusion and
+ * depth stay coherent instead of relying on a cropped background patch.
  *
  * This is intentionally NOT an interactive 3D model viewer.  It is a
  * full-bleed cinematic background with:
