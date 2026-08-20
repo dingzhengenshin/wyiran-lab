@@ -62,57 +62,6 @@ body {
   );
 }
 
-/* ── Top UI ─────────────────────────────────────────── */
-.top-ui {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 5;
-  padding: 22px 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  pointer-events: none;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.brand-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: var(--frog-yellow);
-  box-shadow: 0 0 14px rgba(246, 200, 70, 0.6);
-  animation: pulse-dot 2.5s ease-in-out infinite;
-}
-
-@keyframes pulse-dot {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.3); opacity: 0.75; }
-}
-
-.brand-name {
-  font-size: 24px;
-  font-weight: 800;
-  letter-spacing: 2.5px;
-  color: var(--headphone-dark);
-  text-transform: lowercase;
-}
-
-.brand-sub {
-  font-size: 12px;
-  color: var(--text-light);
-  margin-left: 22px;
-  letter-spacing: 0.8px;
-  font-style: italic;
-  font-weight: 600;
-}
-
 /* ── Bottom UI — Apple liquid glass ────────────────── */
 .bottom-ui {
   position: fixed;
@@ -344,10 +293,6 @@ body {
 
 /* ── Mobile ─────────────────────────────────────────── */
 @media (max-width: 640px) {
-  .top-ui { padding: 18px 20px; }
-  .brand-name { font-size: 21px; }
-  .brand-sub { font-size: 11px; margin-left: 22px; }
-
   .loading-card { padding: 32px 40px; }
   .progress-bar { width: 180px; }
 }

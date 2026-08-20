@@ -2,11 +2,12 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-test("build contains the naiwa 3D experience", async () => {
+test("build contains the 奶龙好米 3D experience", async () => {
   const html = await readFile(new URL("../dist/client/index.html", import.meta.url), "utf8");
-  assert.match(html, /<title>naiwa · 云端奶蛙<\/title>/);
+  assert.match(html, /<title>奶龙好米<\/title>/);
   assert.match(html, /lang="zh-CN"/);
-  assert.match(html, /a frog above the clouds/);
+  assert.doesNotMatch(html, /id="top-ui"/);
+  assert.doesNotMatch(html, /a frog above the clouds/);
   assert.match(html, /id="canvas-container"/);
   assert.match(html, /theme-color" content="#a8d8f0"/);
 });
