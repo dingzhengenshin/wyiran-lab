@@ -1,28 +1,68 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#f5f7fa" />
-    <meta name="color-scheme" content="light" />
-    <title>WYIRAN LAB · 未然实验室</title>
-    <meta name="description" content="在设计、代码与空间计算的交界处，探索更自然的人机体验。" />
-    <meta itemprop="name" content="WYIRAN LAB · 未然实验室" />
-    <meta itemprop="description" content="让复杂隐于无形，让体验自然发生。" />
-    <meta itemprop="image" content="https://wyiranw.xyz/og.png" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://wyiranw.xyz/" />
-    <meta property="og:locale" content="zh_CN" />
-    <meta property="og:title" content="WYIRAN LAB · 未然实验室" />
-    <meta property="og:description" content="让复杂隐于无形，让体验自然发生。" />
-    <meta property="og:image" content="https://wyiranw.xyz/og.png" />
-    <meta property="og:image:width" content="1728" />
-    <meta property="og:image:height" content="907" />
-    <meta property="og:image:alt" content="WYIRAN LAB 未然实验室" />
-    <link rel="icon" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#a8d8f0" />
+    <meta name="description" content="naiwa — a frog above the clouds" />
+    <title>naiwa · 云端奶蛙</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23f6c846'/></svg>" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
+    <!-- 3DGS cloud sea + frog (canvas injected by viewer.js) -->
+    <div id="canvas-container"></div>
+
+    <!-- Edge feather — softens sparse splat borders -->
+    <div class="edge-feather" aria-hidden="true"></div>
+
+    <!-- Top UI -->
+    <header id="top-ui" class="top-ui">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        <h1 class="brand-name">naiwa</h1>
+      </div>
+      <p class="brand-sub">a frog above the clouds</p>
+    </header>
+
+    <!-- Bottom glass controls -->
+    <footer id="bottom-ui" class="bottom-ui hidden">
+      <div class="glass-pill">
+        <button id="btn-reset" class="glass-btn" title="回正" aria-label="回正">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><polyline points="3 3 3 8 8 8"/></svg>
+        </button>
+        <span class="glass-divider"></span>
+        <button id="btn-drift" class="glass-btn active" title="呼吸感" aria-label="呼吸感">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
+      </div>
+    </footer>
+
+    <!-- Loading overlay -->
+    <div id="loading" class="overlay hidden">
+      <div class="loading-card">
+        <div class="cloud-loader">
+          <span class="cloud cloud-1">☁️</span>
+          <span class="cloud cloud-2">☁️</span>
+          <span class="cloud cloud-3">☁️</span>
+        </div>
+        <p id="loading-text" class="loading-text">正在唤醒奶蛙…</p>
+        <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
+        <p id="progress-label" class="progress-label">0%</p>
+      </div>
+    </div>
+
+    <!-- Notice / error -->
+    <div id="notice" class="notice hidden">
+      <div class="notice-card">
+        <p id="notice-text">3D 场景准备中</p>
+        <button id="btn-retry" class="retry-btn hidden" onclick="location.reload()">重试</button>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
   </body>
 </html>

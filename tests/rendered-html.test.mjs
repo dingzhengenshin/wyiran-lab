@@ -2,14 +2,24 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-test("build contains WYIRAN LAB metadata and Vue entry", async () => {
+test("build contains the naiwa 3D experience", async () => {
   const html = await readFile(new URL("../dist/client/index.html", import.meta.url), "utf8");
-  assert.match(html, /<title>WYIRAN LAB/);
+  assert.match(html, /<title>naiwa · 云端奶蛙<\/title>/);
   assert.match(html, /lang="zh-CN"/);
-  assert.match(html, /让复杂隐于无形，让体验自然发生/);
-  assert.match(html, /theme-color" content="#f5f7fa"/);
-  assert.match(html, /id="app"/);
-  assert.doesNotMatch(html, /情侣|王者荣耀|原神/);
+  assert.match(html, /a frog above the clouds/);
+  assert.match(html, /id="canvas-container"/);
+  assert.match(html, /theme-color" content="#a8d8f0"/);
+});
+
+test("build includes the layered splat scene manifest", async () => {
+  const raw = await readFile(new URL("../dist/client/scene-meta.json", import.meta.url), "utf8");
+  const meta = JSON.parse(raw);
+  assert.deepEqual(meta.scenes.map((scene) => scene.id), [
+    "clouds-a",
+    "clouds-b",
+    "frog",
+    "cloud-veil",
+  ]);
 });
 
 test("worker falls back to the SPA shell for navigation requests", async () => {
@@ -25,7 +35,7 @@ test("worker falls back to the SPA shell for navigation requests", async () => {
           const path = new URL(request.url).pathname;
           seen.push(path);
           return path === "/index.html"
-            ? new Response("WYIRAN LAB", { status: 200, headers: { "content-type": "text/html" } })
+            ? new Response("naiwa", { status: 200, headers: { "content-type": "text/html" } })
             : new Response("Not found", { status: 404 });
         },
       },

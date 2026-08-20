@@ -1,6 +1,6 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
-import vue from "@vitejs/plugin-vue";
+import { fileURLToPath, URL } from "node:url";
 import { defineConfig } from "vite";
 import { sites } from "./build/sites-vite-plugin";
 
@@ -22,7 +22,7 @@ export default defineConfig({
   server: isCodexSeatbeltSandbox
     ? { watch: { useFsEvents: false, usePolling: true } }
     : undefined,
-  plugins: [vue(), workerBundle(), sites()],
+  plugins: [workerBundle(), sites()],
   build: {
     outDir: "dist/client",
     emptyOutDir: true,
@@ -33,6 +33,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": resolve("src"),
+      three: fileURLToPath(new URL("./node_modules/three", import.meta.url)),
     },
   },
 });
