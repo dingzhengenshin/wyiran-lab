@@ -1,0 +1,364 @@
+/* ── Reset & base ───────────────────────────────────── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --sky-top: #bfe3ff;
+  --frog-yellow: #f6c846;
+  --headphone-dark: #2b2f36;
+  --text-dark: #2c3e50;
+  --text-light: #6b8aab;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--sky-top);
+  color: var(--text-dark);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+/* ── 3DGS canvas ───────────────────────────────────── */
+#canvas-container {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+#canvas-container.visible {
+  opacity: 1;
+}
+
+#canvas-container canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* ── Edge feather — softens sparse splat borders ──── */
+.edge-feather {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 100% 80% at 50% 50%,
+    transparent 60%,
+    rgba(191, 227, 255, 0.18) 90%,
+    rgba(191, 227, 255, 0.35) 100%
+  );
+}
+
+/* ── Top UI ─────────────────────────────────────────── */
+.top-ui {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  padding: 22px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  pointer-events: none;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--frog-yellow);
+  box-shadow: 0 0 14px rgba(246, 200, 70, 0.6);
+  animation: pulse-dot 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.75; }
+}
+
+.brand-name {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  color: var(--headphone-dark);
+  text-transform: lowercase;
+}
+
+.brand-sub {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-left: 22px;
+  letter-spacing: 0.8px;
+  font-style: italic;
+  font-weight: 600;
+}
+
+/* ── Bottom UI — Apple liquid glass ────────────────── */
+.bottom-ui {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 6;
+  padding: 0 0 32px;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
+}
+
+.bottom-ui.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.glass-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px;
+  border-radius: 9999px;
+  pointer-events: auto;
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(26px) saturate(180%);
+  -webkit-backdrop-filter: blur(26px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.55) inset,
+    0 -1px 0 0 rgba(255, 255, 255, 0.08) inset,
+    0 10px 30px -8px rgba(40, 80, 130, 0.35),
+    0 4px 12px -4px rgba(40, 80, 130, 0.18);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.3s ease,
+              background 0.3s ease;
+}
+
+.glass-pill:hover {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.65) inset,
+    0 -1px 0 0 rgba(255, 255, 255, 0.1) inset,
+    0 14px 36px -8px rgba(40, 80, 130, 0.42),
+    0 6px 14px -4px rgba(40, 80, 130, 0.22);
+}
+
+.glass-btn {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 9999px;
+  background: transparent;
+  color: rgba(43, 47, 54, 0.72);
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.glass-btn:hover {
+  background: rgba(255, 255, 255, 0.42);
+  color: var(--headphone-dark);
+}
+
+.glass-btn:active {
+  transform: scale(0.92);
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.glass-btn.active {
+  background: rgba(255, 255, 255, 0.5);
+  color: var(--headphone-dark);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+}
+
+.glass-btn svg {
+  display: block;
+  filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.5));
+}
+
+.glass-divider {
+  width: 1px;
+  height: 20px;
+  background: rgba(43, 47, 54, 0.12);
+  margin: 0 2px;
+}
+
+/* ── Loading overlay ───────────────────────────────── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(191, 227, 255, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: opacity 0.4s ease;
+}
+
+.overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loading-card {
+  text-align: center;
+  padding: 40px 52px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(100, 150, 200, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.cloud-loader {
+  position: relative;
+  height: 56px;
+  margin-bottom: 18px;
+}
+
+.cloud {
+  position: absolute;
+  font-size: 34px;
+  animation: float-cloud 2.4s ease-in-out infinite;
+  filter: drop-shadow(0 4px 8px rgba(100, 150, 200, 0.2));
+}
+
+.cloud-1 { left: 5%; animation-delay: 0s; }
+.cloud-2 { left: 38%; font-size: 26px; animation-delay: 0.4s; }
+.cloud-3 { left: 66%; font-size: 30px; animation-delay: 0.8s; }
+
+@keyframes float-cloud {
+  0%, 100% { transform: translateY(0); opacity: 0.65; }
+  50% { transform: translateY(-14px); opacity: 1; }
+}
+
+.loading-text {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 18px;
+  letter-spacing: 0.3px;
+}
+
+.progress-bar {
+  width: 220px;
+  height: 6px;
+  background: rgba(100, 150, 200, 0.18);
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 0 auto 8px;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--sky-top), var(--frog-yellow));
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.progress-label {
+  font-size: 12.5px;
+  color: var(--text-light);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+/* ── Notice / error ────────────────────────────────── */
+.notice {
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 8;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.notice.hidden {
+  opacity: 0;
+  transform: translateX(-50%) translateY(10px);
+  pointer-events: none;
+}
+
+.notice-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 100px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 32px rgba(100, 150, 200, 0.15);
+}
+
+.notice-card p {
+  font-size: 13px;
+  color: var(--text-light);
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+.retry-btn {
+  padding: 5px 16px;
+  border: 1px solid var(--frog-yellow);
+  border-radius: 100px;
+  background: var(--frog-yellow);
+  color: var(--headphone-dark);
+  font-size: 12px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.retry-btn:hover {
+  opacity: 0.85;
+}
+
+/* ── Mobile ─────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .top-ui { padding: 18px 20px; }
+  .brand-name { font-size: 21px; }
+  .brand-sub { font-size: 11px; margin-left: 22px; }
+
+  .loading-card { padding: 32px 40px; }
+  .progress-bar { width: 180px; }
+}
+
+/* ── Reduced motion ─────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.2s !important;
+  }
+}
