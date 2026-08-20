@@ -19,3 +19,7 @@ The production build preserves the existing Cloudflare worker wrapper and emits:
 - `dist/client` — static site and compressed `.ksplat` assets
 - `dist/server/index.js` — SPA fallback worker
 - `dist/.openai` — hosting metadata used by the connected deployment
+
+`wrangler.jsonc` explicitly binds `dist/client` as static assets and keeps the
+SPA fallback worker at `dist/server/index.js`, so GitHub-triggered Workers Builds
+do not depend on framework auto-detection.
