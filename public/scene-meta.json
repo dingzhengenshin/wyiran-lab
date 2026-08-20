@@ -25,26 +25,15 @@
       "label": "下载云海场景…"
     },
     {
-      "id": "frog",
-      "input": "frog_source.png",
-      "ply": "frog-masked.ksplat",
-      "num_gaussians": 210995,
-      "file_size_mb": 4.84,
-      "position": [-0.074, -0.044, -1.199],
-      "scale": [0.23, 0.23, 0.23],
+      "id": "subject-cloud-v3",
+      "input": "subject-cloud-v3.png",
+      "ply": "subject-cloud-v3.ksplat",
+      "num_gaussians": 289780,
+      "file_size_mb": 6.65,
+      "position": [-0.122, -0.125, -0.953],
+      "scale": [0.34, 0.34, 0.34],
       "alphaThreshold": 5,
-      "label": "下载奶蛙场景…"
-    },
-    {
-      "id": "cloud-veil",
-      "input": "clouds_source.png",
-      "ply": "cloud-veil.ksplat",
-      "num_gaussians": 98229,
-      "file_size_mb": 2.26,
-      "position": [-0.16, -0.05, -0.4],
-      "scale": [0.22, 0.14, 0.22],
-      "alphaThreshold": 5,
-      "label": "生成近景云雾…"
+      "label": "下载奶娃与云朵主体…"
     }
   ],
   "width": 1672,

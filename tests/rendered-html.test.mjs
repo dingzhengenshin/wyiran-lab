@@ -17,9 +17,9 @@ test("build includes the layered splat scene manifest", async () => {
   assert.deepEqual(meta.scenes.map((scene) => scene.id), [
     "clouds-a",
     "clouds-b",
-    "frog",
-    "cloud-veil",
+    "subject-cloud-v3",
   ]);
+  assert.equal(meta.scenes[2].ply, "subject-cloud-v3.ksplat");
 });
 
 test("worker falls back to the SPA shell for navigation requests", async () => {
